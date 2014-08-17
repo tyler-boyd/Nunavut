@@ -1,0 +1,21 @@
+.modal-header
+  button.close type="button" data-dismiss="modal" aria-hidden="true" &times;
+  h3.modal-title Add Custom Product to Order
+.modal-body#modal-body
+  / Display all clients available
+  .row
+    .col-lg-12
+      .text-center
+        h2 Product Information
+      form.form-horizontal ng-submit='createProduct(product)'
+        div errors='product.errors'
+        input-group for='product.name' label='Name *'
+        input-group for='product.description' label='Description'
+        input-group for='order_item.net_price' label='Net Price *'
+        input-group for='order_item.client_price' label='Client Price *'
+        input-group for='order_item.quantity' label='Quantity *'
+        input-group for='product.supplier_name' label='Actual Supplier'
+        .form-group
+          p.small.col-lg-offset-4 Note: If this product is freight, set "Actual Supplier" to "Freight".
+        .form-group
+          input.btn.btn-primary.btn-lg.col-lg-6.col-lg-offset-3 type='submit' value='Create'

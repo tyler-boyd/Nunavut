@@ -1,0 +1,28 @@
+.modal-header
+    .col-xs-8
+      h3.modal-title Select an Artwork
+    .col-xs-4
+      input.form-control type='search' ng-model='search_query' placeholder='Filter results'
+    .clearfix
+.modal-body
+  div ng-hide='selectedLibrary'
+    .row ng-repeat='library in libraries | filter:search_query'
+      .col-lg-4
+        a.thumbnail ng-click='selectLibrary(library)'
+          div
+            img ng-src='{{library.artworks[0].image_url}}' style="max-width: 100%;"
+          .caption
+            h3
+              | {{library.name}}
+  div ng-show='selectedLibrary'
+    button.btn.btn-default ng-click='unselectLibrary()' Back
+    .row ng-repeat='artwork in selectedLibrary.artworks | filter:search_query'
+      .col-lg-4
+        a.thumbnail href='javascript:void(0)' ng-click='selectArtwork(artwork)'
+          img ng-src='{{artwork.image_url}}' style="max-width: 100%;"
+          .caption
+            h3
+              | {{artwork.name}}
+.modal-footer
+    button.btn.btn-primary ng-click='ok()' OK
+    button.btn.btn-warning ng-click='cancel()' Cancel

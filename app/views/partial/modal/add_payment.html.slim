@@ -1,0 +1,27 @@
+.modal-header
+  button.close ng-click='dismiss()' aria-hidden="true" &times;
+  h1.modal-title Add Payment
+.modal-body
+  form name='paymentForm'
+    .row
+      .col-lg-12
+        div errors='payment.errors'
+        form-group
+          label.control-label.col-lg-4 Payment Method (*)
+          .col-lg-8
+            select.form-control ng-options='method.id as method.name for method in methods' ng-model='payment.payment_method' name='method' required='true'
+          .clearfix
+        form-group ng-show='payment.payment_method == "credit_card"'
+          label.control-label.col-lg-4 Credit Card (*):
+          .col-lg-8
+            select.form-control ng-options='billing.id as billing.name for billing in billings' ng-model='payment.billing_id' name='billing' required='true'
+          .clearfix
+        form-group
+          label.control-label.col-lg-4 Amount in Dollars (*)
+          .col-lg-8
+            input.form-control type='text' name='amount' ng-model='payment.amount_in_dollars' ng-required='true'
+          .clearfix
+.modal-footer
+  button.btn.btn-lg.btn-danger.pull-left ng-click='dismiss()' Cancel
+  button.btn.btn-lg.btn-success.pull-right ng-click='ok(payment)' Submit Payment
+  .clearfix

@@ -1,0 +1,20 @@
+.modal-header
+  button.close ng-click='cancel()' aria-hidden="true" &times;
+  h1.modal-title Add Products To Order
+.modal-body
+  .row
+    .col-lg-12
+      .text-center
+        h2 Product Search
+  .row
+    form ng-submit="search()"
+      .col-lg-8
+        input.form-control ng-model='query.query'
+      .col-lg-4
+        input.btn.btn-primary.col-lg-12 type="submit" value="Search"
+  .row.margin-top-25px ng-show="product_rows" ng-repeat="row in product_rows"
+    .col-xs-3.text-center ng-repeat="product in row track by product.id"
+      a.thumbnail href="javascript:void(0)" ng-click="selectProduct(product)"
+        img.img-responsive ng-src="{{product.image_url}}"
+        | {{product.name}}
+

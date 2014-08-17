@@ -1,0 +1,23 @@
+.modal-header
+    .col-xs-6
+      h3.modal-title Filter Categories
+    .col-xs-6
+      input.form-control type='text' ng-model='query.name' placeholder='Start typing a category name...'
+    .clearfix
+.modal-body
+  div.row ng-repeat='group in filtered_categories(query.name)'
+    div.col-xs-4 ng-repeat='category in group'
+      a.thumbnail href='javascript:void(0)' ng-click='category.selected = !(category.selected || false)' ng-show='category'
+        img.img-responsive ng-src='{{category.image_url}}'
+        .caption
+          .col-xs-2
+            input type='checkbox' ng-model='category.selected'
+          .col-xs-10
+            p
+              | {{category.name}}
+          .clearfix
+        .clearfix
+
+.modal-footer
+    button.btn.btn-warning ng-click='cancel()' Cancel
+    button.btn.btn-success ng-click='confirm()' Confirm

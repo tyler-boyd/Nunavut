@@ -1,0 +1,28 @@
+.modal-header
+  button.close type="button" data-dismiss="modal" aria-hidden="true" &times;
+  h3.modal-title Set Custom Shipping Location
+.modal-body#modal-body
+  / Display all known addresses, and let them set a custom one if they want
+  .row.text-center
+    .col-lg-4
+      h2 Supplier Addresses
+      button.btn.btn-default ng-click='showCustom = false' ng-show='showCustom' Show Supplier Address Form
+      select.form-control ng-model='item.supp_address' ng-options='supplier.address as supplier.name for supplier in suppliers' ng-hide='showCustom'
+    .col-lg-4
+      .text-center
+        h2 Your Address
+      button.btn.btn-warning ng-click='ok(relationship_holder.address)' Ship Straight to Your Organization!
+    .col-lg-4
+      .text-center
+        h2 Custom Address
+      button.btn.btn-default ng-click='showCustom = true' ng-hide='showCustom' Show Custom Address Form
+      textarea.form-control ng-model='item.cust_address' ng-show='showCustom'
+    .clearfix
+  .row
+    .col-xs-12.text-center
+      h2  
+      button.btn.btn-info ng-click='ok("")' Reset to Order Default!
+.modal-footer
+  .pull-right
+    button.btn.btn-primary ng-click='ok(item.supp_address)' ng-hide='showCustom' Save
+    button.btn.btn-primary ng-click='ok(item.cust_address)' ng-show='showCustom' Save

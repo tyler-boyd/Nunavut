@@ -1,0 +1,9 @@
+.modal-content
+  .modal-header
+    button.close ng-click='cancel()' type='button' x
+    h3 Please Confirm
+  .modal-body
+    | {{data.text}}
+  .modal-footer
+    button.btn.btn-default ng-click='cancel()' Cancel
+    a.btn.btn-primary ng-click='ok()' Yes

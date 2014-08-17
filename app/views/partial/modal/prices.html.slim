@@ -1,0 +1,18 @@
+.modal-header
+  .col-xs-6
+    h3.modal-title
+      | Restrict Prices
+  .clearfix
+.modal-body
+  .row
+    form.form-horizontal.col-lg-12
+      .form-group
+        label.control-label.col-lg-4 Minimum Price ($):
+        .col-lg-8
+          input.form-control ng-model="prices.min" type="text"
+      .form-group
+        label.control-label.col-lg-4 Maximum Price ($):
+        .col-lg-8
+          input.form-control ng-model="prices.max" type="text"
+.modal-footer
+  button.btn.btn-success ng-click="close()"  Close

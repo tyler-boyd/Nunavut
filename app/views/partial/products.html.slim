@@ -1,3 +1,30 @@
 .row
-    .col-xs-12
-        h1 Products
+  .col-xs-3
+    h3 Search for Products
+  .col-xs-7
+    form ng-submit='search(data.query)'
+      h3
+        input.form-control type='text' placeholder='Search...' ng-model='data.query'
+  .col-xs-2
+    h3
+      button.btn.btn-success ng-click='search(data.query)' Search
+.row
+  .col-xs-8
+    button.btn.btn-default ng-click='openCategoriesModal()' Restrict Categories
+    button.btn.btn-default ng-click='openLinesModal()' Restrict Lines
+    button.btn.btn-default ng-click='openPricesModal()' Restrict Prices
+  .col-xs-4
+.row
+  .col-xs-12.text-center
+    pagination boundary-links="true" total-items="data.totalItems" items-per-page='24' ng-model="data.currentPage" ng-change='pageChange()' class="pagination-sm" previous-text="<" next-text=">" first-text="First" last-text="Last" max-size='10'
+.row.margin-top-50px
+  .col-xs-12.results
+    div ng-repeat='product in products'
+      span ng-switch='' on='$index % 6' ng-init='outerIndex = $index'
+        span ng-switch-when='0'
+          .row
+            .col-xs-2.text-center ng-show='product' ng-repeat='index in [0,1,2,3,4,5]' ng-init='product = products[outerIndex + index]'
+              a.thumbnail href='#/products/{{product.id}}'
+                img.img-responsive ng-src='{{product.image_url}}'
+                .caption
+                  | {{product.name}} ({{last(product.list_prices) | currency}})

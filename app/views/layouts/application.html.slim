@@ -1,26 +1,25 @@
 DOCTYPE html
 html
-head
-  title Nunavut
-  = stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
-  = javascript_include_tag "application", "data-turbolinks-track" => true
-  = csrf_meta_tags
+    head
+        title Nunavut
+        = stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
+        = javascript_include_tag "application", "data-turbolinks-track" => true
 
-body ng-app='myApp'
-    nav.navbar.navbar-default.navbar-fixed-top
-        .container
-            .navbar-header
-                button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-1"
-                    span class="sr-only" Toggle navigation
-                    span class="icon-bar"
-                    span class="icon-bar"
-                    span class="icon-bar"
-                a.navbar-brand href='#/' Nunavut
-            .collapse.navbar-collapse#navbar-collapse-1
-                ul.nav.navbar-nav.navbar-right
-                    li.hidden
-                    li route='home'
-                        a href='#/home' Home
-                    li route='products'
-                        a href='#/products' Products
-	= yield
+    body ng-app='myApp'
+        nav.navbar.navbar-default.navbar-fixed-top
+            .container
+                .navbar-header
+                    button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-1"
+                        span class="sr-only" Toggle navigation
+                        span class="icon-bar"
+                        span class="icon-bar"
+                        span class="icon-bar"
+                    a.navbar-brand href='#/' Nunavut
+                .collapse.navbar-collapse#navbar-collapse-1
+                    ul.nav.navbar-nav.navbar-right
+                        li.hidden
+                        li route='home'
+                            a href='#/home' Home
+                        li route='products'
+                            a href='#/products' Products
+        = yield
