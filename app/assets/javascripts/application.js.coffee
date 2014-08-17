@@ -40,7 +40,7 @@ config(['$routeProvider', ($routeProvider) ->
   $routeProvider.otherwise {redirectTo: '/home'}
 ]).
 config(['RestangularProvider', '$httpProvider', (RestangularProvider, $httpProvider) ->
-  RestangularProvider.setBaseUrl('http://localhost:3000/api');
+  RestangularProvider.setBaseUrl('http://localhost:8081/api');
   RestangularProvider.addResponseInterceptor (data, operation, what, url, response, deferred) ->
     if data.options
       if _.isString(data.options)
@@ -58,3 +58,4 @@ window.setActive = (path) ->
     $(el).removeClass('active')
     $(el).addClass('active') if path.match($(el).attr('route'))
   )
+window.catalog_id=1
