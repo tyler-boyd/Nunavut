@@ -1,6 +1,10 @@
 $white: #ffffff;
-$green: #18bc9c;
+$black: #000;
+$light-blue: #18bc9c;
 $dark-blue: #2c3e50;
+$light-blue: rgb(55, 182, 206);
+$gold: #A17E0C;
+$dark-gold: #574407;
 
 /*!
  * Start Bootstrap - Freelancer Bootstrap Theme (http://startbootstrap.com)
@@ -12,6 +16,11 @@ body {
     overflow-x: hidden;
 }
 
+header {
+    text-align: center;
+    color: #fff;
+    background: $light-blue;
+}
 p {
     font-size: 20px;
 }
@@ -20,9 +29,31 @@ p.small {
     font-size: 16px;
 }
 
-a.thumbnail {
-  min-height: 150px;
-  max-height: 150px;
+a.product-thumbnail {
+    img {
+        border-radius: 20px;
+    }
+    background-color: $white;
+    border-color: $white;
+    &:hover {
+        background-color: #f3f3f3;
+    }
+    .caption {
+        color: $black;
+        font-weight: 500;
+        font-size: 1.2em;
+        &:hover {
+            color: $light-blue;
+            -webkit-transition: all .3s;
+            -moz-transition: all .3s;
+            transition: all .3s;
+        }
+    }
+    padding: 10px;
+    min-height: 440px;
+    max-height: 440px;
+    overflow: hidden;
+    border-radius: 20px;
 }
 
 a,
@@ -31,7 +62,7 @@ a:focus,
 a:active,
 a.active {
     outline: 0;
-    color: $green;
+    color: $light-blue;
 }
 
 h1,
@@ -65,13 +96,18 @@ hr.star-primary:after {
     font-size: 2em;
 }
 
+.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus {
+    background-color: $dark-blue;
+    border-color: $dark-blue;
+}
+
 hr.star-light {
     border-color: #fff;
 }
 
 hr.star-light:after {
     color: #fff;
-    background-color: $green;
+    background-color: $light-blue;
 }
 
 hr.star-primary {
@@ -87,11 +123,6 @@ hr.star-primary:after {
     margin: 0 auto;
 }
 
-header {
-    text-align: center;
-    color: #fff;
-    background: $green;
-}
 
 header .container {
     padding-top: 100px;
@@ -184,16 +215,16 @@ header .intro-text .skills {
     .navbar-brand {
         color: $white;
         &:hover {
-            color: $green;
+            color: $light-blue;
         }
         &:focus {
-            color: $green;
+            color: $light-blue;
         }
     }
     ul.navbar-nav li>a {
         color: $white;
         &:hover {
-            color: $green;
+            color: $light-blue;
         }
     }
 }
@@ -209,7 +240,7 @@ section h2 {
 
 section.success {
     color: #fff;
-    background: $green;
+    background: $light-blue;
 }
 
 @media(max-width:767px) {
@@ -293,7 +324,7 @@ section.success {
 .btn-outline:active,
 .btn-outline.active {
     border: solid 2px #fff;
-    color: $green;
+    color: $light-blue;
     background: #fff;
 }
 
@@ -346,7 +377,7 @@ section.success {
 }
 
 .floating-label-form-group-with-focus label {
-    color: $green;
+    color: $light-blue;
 }
 
 form .row:first-child .floating-label-form-group {
