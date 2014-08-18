@@ -1,6 +1,7 @@
 $white: #ffffff;
 $black: #000;
 $light-blue: #18bc9c;
+$light-gray: #eeeeee;
 $dark-blue: #2c3e50;
 $light-blue: rgb(55, 182, 206);
 $gold: #A17E0C;
@@ -37,6 +38,7 @@ a.product-thumbnail {
     border-color: $white;
     &:hover {
         background-color: #f3f3f3;
+        border-color: $dark-blue;
     }
     .caption {
         color: $black;
@@ -96,6 +98,11 @@ hr.star-primary:after {
     font-size: 2em;
 }
 
+.results {
+    padding-top: 20px;
+    background-color: $light-gray;
+}
+
 .pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus {
     background-color: $dark-blue;
     border-color: $dark-blue;
@@ -150,7 +157,7 @@ header .intro-text .skills {
 @media(min-width:768px) {
     header .container {
         padding-top: 75px;
-        padding-bottom: 100px;
+        padding-bottom: 0px;
     }
 
     header .intro-text .name {
