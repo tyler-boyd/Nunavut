@@ -1,9 +1,8 @@
 $white: #ffffff;
 $black: #000;
-$light-blue: #18bc9c;
 $light-gray: #eeeeee;
-$dark-blue: #2c3e50;
 $light-blue: rgb(55, 182, 206);
+$dark-blue: #2c3e50;
 $gold: #A17E0C;
 $dark-gold: #574407;
 
@@ -18,13 +17,19 @@ body {
 }
 
 header {
-    text-align: center;
     color: #fff;
     background: $light-blue;
 }
 p {
     font-size: 20px;
 }
+
+input.td-control {
+    width: 100px;
+}
+
+.float-left { float: left; }
+.float-right { float: right; }
 
 p.small {
     font-size: 16px;
@@ -56,6 +61,13 @@ a.product-thumbnail {
     max-height: 440px;
     overflow: hidden;
     border-radius: 20px;
+}
+
+.home-thumbnail {
+    &:hover {
+        border-color: $black;
+        border-width: 10px;
+    }
 }
 
 a,
@@ -90,6 +102,7 @@ hr.star-primary {
 hr.star-light:after,
 hr.star-primary:after {
     content: "\f005";
+    background-color: $light-blue;
     display: inline-block;
     position: relative;
     top: -.8em;
@@ -118,12 +131,12 @@ hr.star-light:after {
 }
 
 hr.star-primary {
-    border-color: $dark-blue;
+    border-color: $white;
 }
 
 hr.star-primary:after {
-    color: $dark-blue;
-    background-color: #fff;
+    color: $white;
+    background-color: $light-blue;
 }
 
 .img-centered {

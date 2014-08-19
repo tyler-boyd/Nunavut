@@ -41,9 +41,9 @@ header
               .row
                 .col-xs-3.text-center ng-show='product' ng-repeat='index in [0,1,2,3]' ng-init='product = products[outerIndex + index]'
                   a.thumbnail.product-thumbnail href='#/products/{{product.id}}'
-                    img.img-responsive ng-src='http://localhost:8081/{{product.fullsize_image_url}}'
+                    img.img-responsive ng-src='http://192.168.2.161:3000/{{product.fullsize_image_url}}'
                     .caption
                       | {{product.name}} ({{last(product.list_prices) | currency}})
 .row
   .col-xs-12.text-center
-    pagination boundary-links="true" total-items="data.totalItems" items-per-page='24' ng-model="data.currentPage" ng-change='pageChange()' class="pagination-sm" previous-text="<" next-text=">"
+    pagination boundary-links="true" total-items="data.totalItems" items-per-page='24' ng-model="data.currentPage" ng-change='pageChange()' class="pagination-sm" previous-text="<" next-text=">" first-text="First" last-text="Last" max-size='10'
