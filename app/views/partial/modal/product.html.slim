@@ -56,6 +56,7 @@
             | {{key|humanize}}
         .col-lg-6
           select.form-control ng-options='o as o for o in value' ng-model='item.options[key]'
+        .clearfix
       button.btn.btn-lg.btn-primary ng-click='addToKit(item)' Add To Kit
 .modal-footer
   button.btn.btn-success ng-click="close()" Close

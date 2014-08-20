@@ -24,6 +24,13 @@ p {
     font-size: 20px;
 }
 
+.items {
+    margin-top: 20px;
+    background-color: $dark-blue;
+    padding: 20px;
+    border-radius: 20px;
+}
+
 input.td-control {
     width: 100px;
 }
@@ -33,6 +40,10 @@ input.td-control {
 
 p.small {
     font-size: 16px;
+}
+
+img.product-image {
+    border-radius: 20px;
 }
 
 a.product-thumbnail {
@@ -57,8 +68,12 @@ a.product-thumbnail {
         }
     }
     padding: 10px;
-    min-height: 360px;
-    max-height: 360px;
+    min-height: 400px;
+    max-height: 400px;
+    @media(min-width: 1200px) {
+        min-height: 360px;
+        max-height: 360px;
+    }
     overflow: hidden;
     border-radius: 20px;
 }
@@ -91,7 +106,7 @@ h6 {
 
 hr.star-light,
 hr.star-primary {
-    margin: 25px auto 30px;
+    margin: 25px auto 10px;
     padding: 0;
     max-width: 250px;
     border: 0;

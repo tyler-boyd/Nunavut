@@ -4,41 +4,43 @@ header style='padding-bottom: 50px;'
       .col-xs-12
         h1.text-center View Kit
         hr.star-primary
-    .row.margin-top-10px
-      .col-xs-12
-        h2.text-left Items
-    .row
-      .col-xs-12
-        table.table
-          thead
-            tr
-              th Product
-              th Quantity
-              th Price
-              th Options
-              td
-          tbody
-            tr ng-repeat='item in kit.items track by item.id'
-              td.col-xs-3
-                p &nbsp;{{item.product.name}}
-                img.float-left.img-responsive ng-src='http://192.168.2.161:3000{{item.product.image_url}}'
-              td
-                p ng-show='!item.editing' &nbsp;{{item.quantity}}
-                input.form-control.td-control type='number' ng-model='item.quantity' ng-show='item.editing'
-              td
-                p Unit: {{pricePer(item.product, item.quantity)|currency}}
-                p Total: {{totalPrice(item)|currency}}
-              td
-                dl
-                  span ng-repeat='(key,value) in item.product.options'
-                    dt &nbsp;{{key|humanize}}
-                    dd ng-show='item.editing'
-                      select.form-control ng-model='item.options[key]' ng-options='o for o in value'
-                    dd ng-show='!item.editing'
-                      p &nbsp;{{item.options[key]|humanize}}
-              td.text-right
-                .btn-group
-                  button.btn.btn-success ng-click='item.editing = false ; save()' ng-show='item.editing' Save
-                  button.btn.btn-warning ng-click='reset()' ng-show='item.editing' Reset
-                  button.btn.btn-danger ng-click='removeItem(item) ; save()' ng-show='item.editing' X
-                button.btn.btn-default ng-click='item.editing = true' ng-show='!item.editing' Edit
+    .items
+      .row
+        .col-xs-12
+          h2.text-left Items
+      .row
+        .col-xs-12
+          table.table
+            thead
+              tr
+                th colspan='2' Product
+                th Quantity
+                th Price
+                th Options
+                td
+            tbody
+              tr ng-repeat='item in kit.items track by item.id'
+                td.col-lg-3
+                  img.float-left.img-responsive.product-image ng-src='http://192.168.2.161:3000{{item.product.image_url}}'
+                td
+                  p &nbsp;{{item.product.name}}
+                td
+                  p ng-show='!item.editing' &nbsp;{{item.quantity}}
+                  input.form-control.td-control type='number' ng-model='item.quantity' ng-show='item.editing'
+                td
+                  p Unit: {{pricePer(item.product, item.quantity)|currency}}
+                  p Total: {{totalPrice(item)|currency}}
+                td
+                  dl
+                    span ng-repeat='(key,value) in item.product.options'
+                      dt &nbsp;{{key|humanize}}
+                      dd ng-show='item.editing'
+                        select.form-control ng-model='item.options[key]' ng-options='o for o in value'
+                      dd ng-show='!item.editing'
+                        p &nbsp;{{item.options[key]|humanize}}
+                td.text-right
+                  .btn-group
+                    button.btn.btn-success ng-click='item.editing = false ; save()' ng-show='item.editing' Save
+                    button.btn.btn-warning ng-click='reset()' ng-show='item.editing' Reset
+                    button.btn.btn-danger ng-click='removeItem(item) ; save()' ng-show='item.editing' X
+                  button.btn.btn-default ng-click='item.editing = true' ng-show='!item.editing' Edit
