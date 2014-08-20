@@ -37,7 +37,7 @@ myApp = angular.module('myApp', [
 ]).
 config(['$routeProvider', ($routeProvider) ->
   $routeProvider.when '/home', {templateUrl: '/partial/home.html', controller: 'HomeCtrl' }
-  $routeProvider.when '/products', {templateUrl: '/partial/products.html', controller: 'ProductsIndexCtrl' }
+  $routeProvider.when '/products', {templateUrl: '/partial/products.html', controller: 'ProductsIndexCtrl', reloadOnSearch: false }
   $routeProvider.when '/kit', {templateUrl: '/partial/kit.html', controller: 'KitCtrl'}
   $routeProvider.otherwise {redirectTo: '/home'}
 ]).

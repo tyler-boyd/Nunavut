@@ -57,8 +57,8 @@ a.product-thumbnail {
         }
     }
     padding: 10px;
-    min-height: 440px;
-    max-height: 440px;
+    min-height: 360px;
+    max-height: 360px;
     overflow: hidden;
     border-radius: 20px;
 }
@@ -114,6 +114,9 @@ hr.star-primary:after {
 .results {
     padding-top: 20px;
     background-color: $light-gray;
+    .container {
+        width: 75%;
+    }
 }
 
 .pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus {

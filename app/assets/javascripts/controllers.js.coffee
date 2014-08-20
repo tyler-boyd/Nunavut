@@ -5,8 +5,8 @@ app.controller 'HomeCtrl',['$scope', ($scope)->
 ]
 
 app.controller "ProductsIndexCtrl", [
-  "$scope", "$modal", "ApiFactory", "$routeParams", "$location",
-  ($scope, $modal, ApiFactory, $routeParams, $location) ->
+  "$scope", "$modal", "ApiFactory", "$routeParams", "$location", "$q"
+  ($scope, $modal, ApiFactory, $routeParams, $location, $q) ->
     cats = undefined
     lines = undefined
     $scope._ = _
@@ -52,18 +52,21 @@ app.controller "ProductsIndexCtrl", [
 
 
     $scope.data.totalItems = $scope.data.currentPage * 24
-    ApiFactory.getCategories().then (all_cats) ->
+    categories_promise = ApiFactory.getCategories()
+    categories_promise.then (all_cats) ->
       if cats
         _.each all_cats, (cat) ->
           cat.selected = true  if _.contains(cats, cat.name)
-
       $scope.all_categories = all_cats
-      ApiFactory.getLines().then (all_lines) ->
-        if lines
-          _.each all_lines, (line) ->
-            line.selected = true  if _.contains(lines, line.name)
 
-        $scope.all_lines = all_lines
+    lines_promise = ApiFactory.getLines()
+    lines_promise.then (all_lines) ->
+      if lines
+        _.each all_lines, (line) ->
+          line.selected = true  if _.contains(lines, line.name)
+      $scope.all_lines = all_lines
+
+    $q.all([categories_promise, lines_promise]).then () ->
         $scope.search $scope.search.query
 
 

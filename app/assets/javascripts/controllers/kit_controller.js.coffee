@@ -19,7 +19,7 @@ app.controller 'KitCtrl',
     $scope.pricePer = (product, quantity) ->
       return unless product && quantity && product.quantities && product.quantities[0]
       revq = angular.copy(product.quantities).reverse()
-      (_.find(angular.copy(product.prices).reverse(), (price, index) -> quantity >= revq[index] )||product.prices[0])*(window.rh_markup||1.0)
+      _.find(angular.copy(product.prices).reverse(), (price, index) -> quantity >= revq[index] )||product.prices[0]
     $scope.totalPrice = (item) ->
       item.quantity * $scope.pricePer(item.product, item.quantity)
 ]

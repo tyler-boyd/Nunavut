@@ -36,10 +36,10 @@ header
     .row.margin-top-50px.results
       .col-xs-12
         div ng-repeat='product in products'
-          span ng-switch='' on='$index % 4' ng-init='outerIndex = $index'
+          span ng-switch='' on='$index % 6' ng-init='outerIndex = $index'
             span ng-switch-when='0'
               .row
-                .col-xs-3.text-center ng-show='product' ng-repeat='index in [0,1,2,3]' ng-init='product = products[outerIndex + index]'
+                .col-xs-2.text-center ng-show='product' ng-repeat='index in [0,1,2,3,4,5]' ng-init='product = products[outerIndex + index]'
                   a.thumbnail.product-thumbnail href='#/products/{{product.id}}'
                     img.img-responsive ng-src='http://192.168.2.161:3000/{{product.fullsize_image_url}}'
                     .caption
