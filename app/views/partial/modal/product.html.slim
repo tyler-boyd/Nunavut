@@ -1,0 +1,61 @@
+.modal-header
+  .col-xs-6
+    h3.modal-title
+      | View Product
+  .clearfix
+.modal-body
+  .row
+    .col-xs-4
+      img.img-responsive ng-src="http://192.168.2.161:3000{{product.fullsize_image_url}}"
+    .col-xs-8
+      p.small &nbsp;{{product.description}}
+      .margin-top-25px
+      table.table.table-bordered
+        tbody
+          tr
+            th Quantity
+            td ng-repeat="quantity in product.quantities"
+              span ng-show="product.quantities[$index+1]" &nbsp;{{quantity}}-{{product.quantities[$index+1]-1}}
+              span ng-show="!product.quantities[$index+1]" &nbsp;{{quantity}}+
+          tr
+            th Price
+            td ng-repeat="price in product.list_prices" &nbsp;{{price|currency}}
+      dl.dl-horizontal
+        dt SKU
+        dd &nbsp;{{product.sku}}
+        span ng-repeat="(key,value) in product.options"
+          dt &nbsp;{{key|humanize}}
+          dd &nbsp;{{value|humanize}}
+  .row.margin-top-10px
+    .col-xs-12
+      h4 Add To Kit
+      hr
+      .row
+        .col-lg-6
+          p Quantity
+        .col-lg-6
+          input.form-control type='text' ng-model='item.quantity'
+        .clearfix
+      .row
+        .col-lg-6
+          p Price/ea
+        .col-lg-6
+          p
+            | {{pricePer(product, item.quantity)|currency}}
+        .clearfix
+      .row
+        .col-lg-6
+          p Total Price
+        .col-lg-6
+          p
+            | {{totalPrice(item)|currency}}
+        .clearfix
+      .row ng-repeat='(key, value) in product.options'
+        .col-lg-6
+          p
+            | {{key|humanize}}
+        .col-lg-6
+          select.form-control ng-options='o as o for o in value' ng-model='item.options[key]'
+      button.btn.btn-lg.btn-primary ng-click='addToKit(item)' Add To Kit
+.modal-footer
+  button.btn.btn-success ng-click="close()" Close

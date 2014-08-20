@@ -39,7 +39,14 @@ app.factory 'KitStore', ['$window', ($window) ->
     kit: () -> this._val
     addItem: (item) ->
       this._val.items ||= []
-      this._val.items.unshift item
+      if this._val.items.length == 0
+        item.id = 1
+      else
+        item.id = this._val.items[this._val.items.length-1].id+1
+      this._val.items.push item
+    removeItem: (item) ->
+      this._val.items ||= []
+      this._val.items = _.select(this._val.items, (this_item) -> this_item.id != item.id)
   }
 ]
 

@@ -1,5 +1,28 @@
 app = angular.module('myApp.controllers')
 
+app.controller 'ProductModalCtrl',['$scope', '$modalInstance', 'product', 'KitStore',
+($scope, $modalInstance, product, KitStore)->
+  $scope.product = product
+  option_flattener = (carry, value, key) ->
+    carry[key] = value[0]
+    carry
+  $scope.item = {
+    quantity: product.quantities[0]
+    product: product
+    options: _.inject(product.options, option_flattener, {})
+  }
+  $scope.pricePer = (product, quantity) ->
+    window.pricePer(product, quantity)
+  $scope.totalPrice = (item) ->
+    window.totalPrice(item)
+  $scope.close = ->
+    $modalInstance.dismiss()
+  $scope.addToKit = (item) ->
+    KitStore.addItem(item)
+    KitStore.save()
+    $modalInstance.close(item)
+]
+
 app.controller "CategoriesFilterModalCtrl", [
   "$scope"
   "$modalInstance"
@@ -93,16 +116,6 @@ app.controller "LinesFilterModalCtrl", [
 
     $scope.cancel = ->
       $modalInstance.dismiss $scope.lines
-]
-app.controller "ProductModalCtrl", [
-  "$scope"
-  "product"
-  "$modalInstance"
-  ($scope, product, $modalInstance) ->
-    $scope.development = false
-    $scope.product = product
-    $scope.close = ->
-      $modalInstance.dismiss()
 ]
 app.controller "PricesModalCtrl", [
   "$scope"

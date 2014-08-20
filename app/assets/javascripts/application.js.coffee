@@ -61,3 +61,9 @@ window.setActive = (path) ->
     $(el).addClass('active') if path.match($(el).attr('route'))
   )
 window.catalog_id=1
+
+window.pricePer = (product, quantity) ->
+  return unless product && quantity && product.quantities && product.quantities[0]
+  revq = angular.copy(product.quantities).reverse()
+  _.find(angular.copy(product.prices).reverse(), (price, index) -> quantity >= revq[index] )||product.prices[0]
+window.totalPrice = (item) -> item.quantity * window.pricePer(item.product, item.quantity)

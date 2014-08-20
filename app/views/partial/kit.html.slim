@@ -4,7 +4,7 @@ header style='padding-bottom: 50px;'
       .col-xs-12
         h1.text-center View Kit
         hr.star-primary
-    .row.margin-top-50px
+    .row.margin-top-10px
       .col-xs-12
         h2.text-left Items
     .row
@@ -18,10 +18,10 @@ header style='padding-bottom: 50px;'
               th Options
               td
           tbody
-            tr ng-repeat='item in kit.items'
+            tr ng-repeat='item in kit.items track by item.id'
               td.col-xs-3
                 p &nbsp;{{item.product.name}}
-                img.float-left.img-responsive ng-src='{{item.product.image_url}}'
+                img.float-left.img-responsive ng-src='http://192.168.2.161:3000{{item.product.image_url}}'
               td
                 p ng-show='!item.editing' &nbsp;{{item.quantity}}
                 input.form-control.td-control type='number' ng-model='item.quantity' ng-show='item.editing'
@@ -30,7 +30,7 @@ header style='padding-bottom: 50px;'
                 p Total: {{totalPrice(item)|currency}}
               td
                 dl
-                  span ng-repeat='(key,value) in item.available_options'
+                  span ng-repeat='(key,value) in item.product.options'
                     dt &nbsp;{{key|humanize}}
                     dd ng-show='item.editing'
                       select.form-control ng-model='item.options[key]' ng-options='o for o in value'

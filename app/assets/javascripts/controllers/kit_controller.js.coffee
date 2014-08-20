@@ -7,6 +7,8 @@ app.controller 'KitCtrl',
     $scope.kit = KitStore.kit()
     $scope.addItem = (item) ->
       KitStore.addItem(item)
+    $scope.removeItem = (item) ->
+      KitStore.removeItem(item)
     $scope.save = () -> KitStore.save()
     $scope.reset = () -> $scope.kit = KitStore.reset()
     $scope.getArtwork = (id) ->
@@ -17,9 +19,7 @@ app.controller 'KitCtrl',
     $scope.artworkStore = ArtworkStore
 
     $scope.pricePer = (product, quantity) ->
-      return unless product && quantity && product.quantities && product.quantities[0]
-      revq = angular.copy(product.quantities).reverse()
-      _.find(angular.copy(product.prices).reverse(), (price, index) -> quantity >= revq[index] )||product.prices[0]
+      window.pricePer(product, quantity)
     $scope.totalPrice = (item) ->
-      item.quantity * $scope.pricePer(item.product, item.quantity)
+      window.totalPrice(item)
 ]

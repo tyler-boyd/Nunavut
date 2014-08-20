@@ -41,11 +41,11 @@ app.controller "ProductsIndexCtrl", [
     cats = [cats]  if typeof cats is "string"
     lines = [lines]  if typeof lines is "string"
     $scope.data = {
-      query: $routeParams.query or ""
-      currentPage: $routeParams.currentPage or 1
-      sort: $routeParams.sort or "none"
+      query: $routeParams.query || ""
+      currentPage: $routeParams.currentPage || 1
+      sort: $routeParams.sort || "none"
       prices: {
-        min: $routeParams.min_price || 0,
+        min: $routeParams.min_price || undefined,
         max: $routeParams.max_price || undefined
       }
     }
@@ -67,8 +67,19 @@ app.controller "ProductsIndexCtrl", [
       $scope.all_lines = all_lines
 
     $q.all([categories_promise, lines_promise]).then () ->
-        $scope.search $scope.search.query
+      $scope.search $scope.search.query
 
+    $scope.openProductModal = (product) ->
+      modalInstance = $modal.open(
+        templateUrl: 'partials/modal/product.html'
+        controller: 'ProductModalCtrl'
+        size: 'lg'
+        resolve:
+          product: ->
+            product
+      )
+      modalInstance.result.then (item) ->
+        $location.path('/kit')
 
     $scope.openCategoriesModal = ->
       modalInstance = $modal.open(
