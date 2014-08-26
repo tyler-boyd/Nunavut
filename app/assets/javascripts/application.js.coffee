@@ -36,13 +36,13 @@ myApp = angular.module('myApp', [
     'ui.bootstrap.showErrors'
 ]).
 config(['$routeProvider', ($routeProvider) ->
-  $routeProvider.when '/home', {templateUrl: '/partial/home.html', controller: 'HomeCtrl' }
-  $routeProvider.when '/products', {templateUrl: '/partial/products.html', controller: 'ProductsIndexCtrl', reloadOnSearch: false }
-  $routeProvider.when '/kit', {templateUrl: '/partial/kit.html', controller: 'KitCtrl'}
+  $routeProvider.when '/home', {templateUrl: 'partial/home.html', controller: 'HomeCtrl' }
+  $routeProvider.when '/products', {templateUrl: 'partial/products.html', controller: 'ProductsIndexCtrl', reloadOnSearch: false }
+  $routeProvider.when '/kit', {templateUrl: 'partial/kit.html', controller: 'KitCtrl'}
   $routeProvider.otherwise {redirectTo: '/home'}
 ]).
 config(['RestangularProvider', '$httpProvider', (RestangularProvider, $httpProvider) ->
-  RestangularProvider.setBaseUrl('http://192.168.2.161:3000/api');
+  RestangularProvider.setBaseUrl('https://promocatalyst.net/api');
   RestangularProvider.addResponseInterceptor (data, operation, what, url, response, deferred) ->
     if data.options
       if _.isString(data.options)

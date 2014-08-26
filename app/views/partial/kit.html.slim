@@ -21,7 +21,7 @@ header style='padding-bottom: 50px;'
             tbody
               tr ng-repeat='item in kit.items track by item.id'
                 td.col-lg-3
-                  img.float-left.img-responsive.product-image ng-src='http://192.168.2.161:3000{{item.product.image_url}}'
+                  img.float-left.img-responsive.product-image ng-src='{{item.product.image_url}}'
                 td
                   p &nbsp;{{item.product.name}}
                 td

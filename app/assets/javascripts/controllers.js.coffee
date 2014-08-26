@@ -71,7 +71,7 @@ app.controller "ProductsIndexCtrl", [
 
     $scope.openProductModal = (product) ->
       modalInstance = $modal.open(
-        templateUrl: 'partials/modal/product.html'
+        templateUrl: 'partial/modal/product.html'
         controller: 'ProductModalCtrl'
         size: 'lg'
         resolve:
@@ -83,7 +83,7 @@ app.controller "ProductsIndexCtrl", [
 
     $scope.openCategoriesModal = ->
       modalInstance = $modal.open(
-        templateUrl: "partials/modal/categories_filter.html"
+        templateUrl: "partial/modal/categories_filter.html"
         controller: "CategoriesFilterModalCtrl"
         size: "lg"
         resolve:
@@ -96,7 +96,7 @@ app.controller "ProductsIndexCtrl", [
 
     $scope.openLinesModal = ->
       modalInstance = $modal.open(
-        templateUrl: "partials/modal/lines_filter.html"
+        templateUrl: "partial/modal/lines_filter.html"
         controller: "LinesFilterModalCtrl"
         size: "lg"
         resolve:
@@ -109,7 +109,7 @@ app.controller "ProductsIndexCtrl", [
     $scope.openPricesModal = ->
       $scope.data.prices = $scope.data.prices || {}
       modalInstance = $modal.open(
-        templateUrl: "partials/modal/prices.html"
+        templateUrl: "partial/modal/prices.html"
         controller: "PricesModalCtrl"
         size: "lg"
         resolve:
