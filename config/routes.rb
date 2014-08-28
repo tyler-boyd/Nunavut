@@ -2,6 +2,7 @@ Nunavut::Application.routes.draw do
   root 'welcome#index'
   get 'partial/(*partial_name)' => 'welcome#partial'
   get 'partials/(*partial_name)' => 'welcome#partial'
+  get '/assets/(*asset_name)' => 'welcome#asset'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

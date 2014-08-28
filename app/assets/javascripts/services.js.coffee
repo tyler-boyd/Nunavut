@@ -14,6 +14,8 @@ app.factory 'ApiFactory', ['Restangular', (Restangular) ->
         params.sort = "-price"
       params.min_price = min_price if min_price
       params.max_price = max_price if max_price
+      params.min_net_price = min_net_price if min_net_price
+      params.max_net_price = max_net_price if max_net_price
       params.categories = JSON.stringify(_.map categories, (cat) -> cat.name) if categories
       params.lines = JSON.stringify(_.map suppliers, (sup) -> sup.name) if suppliers
       params.catalog_id = window.catalog_id

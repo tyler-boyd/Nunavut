@@ -29,6 +29,8 @@ app.controller "ProductsIndexCtrl", [
         $location.search "min_price", $scope.data.prices.min
         $location.search "max_price", $scope.data.prices.max
 
+    $scope.$watch 'data.sort', (newVal, oldVal)->
+      $scope.search($scope.data.query)
 
     $scope.pageChange = ->
       $scope.search $scope.data.query
@@ -92,6 +94,8 @@ app.controller "ProductsIndexCtrl", [
       )
       modalInstance.result.then (categories) ->
         $scope.all_categories = categories
+        $scope.search($scope.data.query)
+      , () -> $scope.search($scope.data.query)
 
 
     $scope.openLinesModal = ->
@@ -103,8 +107,11 @@ app.controller "ProductsIndexCtrl", [
           lines: ->
             $scope.all_lines
       )
-      modalInstance.result.then (lines) ->
+      modalInstance.result.then ((lines) ->
         $scope.all_lines = lines
+        $scope.search($scope.data.query)
+      ), () ->
+        $scope.search($scope.data.query)
 
     $scope.openPricesModal = ->
       $scope.data.prices = $scope.data.prices || {}
@@ -118,8 +125,10 @@ app.controller "ProductsIndexCtrl", [
       )
       modalInstance.result.then ((result) ->
         $scope.data.prices = result
+        $scope.search($scope.data.query)
       ), (result) ->
         $scope.data.prices = result
+        $scope.search($scope.data.query)
 
 ]
 
