@@ -18,8 +18,20 @@ app.controller 'KitCtrl',
       ArtworkStore.createArtwork(artwork)
     $scope.artworkStore = ArtworkStore
 
+    $scope.submitKit = () ->
+      ApiFactory.submitKit($scope.kit).then (kit) ->
+        if kit.errors.length == 0
+          KitStore.deleteAll()
+          alert 'Quote Request successfully submitted'
+        else
+          $scope.kit.errors = kit.errors
+
     $scope.pricePer = (product, quantity) ->
       window.pricePer(product, quantity)
     $scope.totalPrice = (item) ->
       window.totalPrice(item)
+    $scope.total_price = () ->
+      _.inject($scope.kit.items, (carry, item) ->
+        carry + $scope.totalPrice(item)
+      , 0)
 ]

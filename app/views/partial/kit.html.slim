@@ -44,3 +44,26 @@ header style='padding-bottom: 50px;'
                     button.btn.btn-warning ng-click='reset()' ng-show='item.editing' Reset
                     button.btn.btn-danger ng-click='removeItem(item) ; save()' ng-show='item.editing' X
                   button.btn.btn-default ng-click='item.editing = true' ng-show='!item.editing' Edit
+              tr
+                td colspan='4'
+                td colspan='2'
+                  p Total Price: {{total_price()|currency}}
+    .submit-container
+      .row
+        .col-xs-12
+          h2.text-left Your Information
+          form.form-horizontal ng-submit='submitKit()'
+            .form-group
+              label.control-label.col-lg-4 for='name' Name
+              .col-lg-8
+                input#name.form-control type='text' ng-model='kit.name'
+            .form-group
+              label.control-label.col-lg-4 for='email' Email
+              .col-lg-8
+                input#email.form-control type='email' ng-model='kit.email'
+            .form-group
+              label.control-label.col-lg-4 type='text' for='phone' Phone
+              .col-lg-8
+                input#phone.form-control ng-model='kit.phone'
+            .form-group.margin-top-25px
+              button.btn.btn-lg.btn-default.col-xs-6.col-xs-offset-3 type='submit' Submit Request for Quote!

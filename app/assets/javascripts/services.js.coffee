@@ -2,7 +2,7 @@ app = angular.module('myApp.services', [])
 
 app.factory 'ApiFactory', ['Restangular', (Restangular) ->
   {
-    searchProducts: (query, categories, suppliers, page, sort, min_price, max_price) ->
+    searchProducts: (query, categories, suppliers, page, sort, min_price, max_price, min_net_price, max_net_price) ->
       params = {
         query: query,
         page: page
@@ -20,16 +20,26 @@ app.factory 'ApiFactory', ['Restangular', (Restangular) ->
       params.lines = JSON.stringify(_.map suppliers, (sup) -> sup.name) if suppliers
       params.catalog_id = window.catalog_id
       Restangular.one('products').get(params)
-    , getProduct: (product_id) ->
+    getProduct: (product_id) ->
       Restangular.one('products', product_id).get()
-    , getCategories: () ->
+    getCategories: () ->
       Restangular.all('categories').getList()
-    , getSuppliers: () ->
+    getSuppliers: () ->
       Restangular.all('suppliers').getList()
-    , getLines: () ->
+    getLines: () ->
       Restangular.all('lines').getList()
-    , getOrganization: (id) ->
+    getOrganization: (id) ->
       Restangular.one('organizations', id).get()
+    submitKit: (orig_kit) ->
+      kit = angular.copy(orig_kit)
+      params = {}
+      params.quote = _.pick(kit, ['name', 'email', 'phone', 'items'])
+      _.each params.quote.items, (item) ->
+        item.id = undefined
+        item.product_id = item.product.id if item.product
+        item.options = JSON.stringify(item.options)
+        item.product = undefined
+      Restangular.one('microsites', window.microsite_id).all('quotes').customPOST({quote: kit})
   }
 ]
 
@@ -49,6 +59,9 @@ app.factory 'KitStore', ['$window', ($window) ->
     removeItem: (item) ->
       this._val.items ||= []
       this._val.items = _.select(this._val.items, (this_item) -> this_item.id != item.id)
+    deleteAll: () ->
+      this._val.items = []
+      this.save()
   }
 ]
 

@@ -2,11 +2,14 @@
   .col-xs-6
     h3.modal-title
       | View Product
+  .col-xs-6
+    button.close ng-click='close()'
+      span aria-hidden='true' &times;
   .clearfix
 .modal-body
   .row
     .col-xs-4
-      img.img-responsive ng-src="http://192.168.2.161:3000{{product.fullsize_image_url}}"
+      img.img-responsive ng-src="{{product.fullsize_image_url}}"
     .col-xs-8
       p.small &nbsp;{{product.description}}
       .margin-top-25px
@@ -57,6 +60,8 @@
         .col-lg-6
           select.form-control ng-options='o as o for o in value' ng-model='item.options[key]'
         .clearfix
-      button.btn.btn-lg.btn-primary ng-click='addToKit(item)' Add To Kit
+      .row.margin-top-25px
+        .col-xs-8.col-xs-offset-2
+          button.btn.btn-lg.btn-primary.col-xs-12 ng-click='addToKit(item)' Add To Kit
 .modal-footer
-  button.btn.btn-success ng-click="close()" Close
+  button.btn.btn-danger ng-click="close()" Close
