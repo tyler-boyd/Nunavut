@@ -53,6 +53,8 @@ config(['RestangularProvider', '$httpProvider', (RestangularProvider, $httpProvi
 ]).run(['$rootScope', '$location', ($rootScope, $location) ->
   $rootScope.$on '$routeChangeStart', (event, next, current) ->
     window.setActive($location.path())
+  window.catalog_id||=1
+  window.microsite_id||=1
 ])
 
 window.setActive = (path) ->
@@ -60,8 +62,6 @@ window.setActive = (path) ->
     $(el).removeClass('active')
     $(el).addClass('active') if path.match($(el).attr('route'))
   )
-window.catalog_id||=1
-window.microsite_id||=1
 
 window.pricePer = (product, quantity) ->
   return unless product && quantity && product.quantities && product.quantities[0]
