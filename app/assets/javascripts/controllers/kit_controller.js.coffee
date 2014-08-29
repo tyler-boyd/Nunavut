@@ -2,8 +2,8 @@ app = angular.module('myApp.controllers')
 
 app.controller 'KitCtrl',
 [
-  '$scope', 'ApiFactory', '$modal', 'KitStore', 'ArtworkStore',
-  ($scope, ApiFactory, $modal, KitStore, ArtworkStore) ->
+  '$scope', 'ApiFactory', '$modal', 'KitStore', 'ArtworkStore', '$location',
+  ($scope, ApiFactory, $modal, KitStore, ArtworkStore, $location) ->
     $scope.kit = KitStore.kit()
     $scope.addItem = (item) ->
       KitStore.addItem(item)
@@ -25,6 +25,9 @@ app.controller 'KitCtrl',
           alert 'Quote Request successfully submitted'
         else
           $scope.kit.errors = kit.errors
+
+    $scope.goShop = () ->
+      $location.path '/products'
 
     $scope.pricePer = (product, quantity) ->
       window.pricePer(product, quantity)
