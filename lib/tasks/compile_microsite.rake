@@ -18,8 +18,8 @@ task compile_microsite: :environment do
   session = ActionDispatch::Integration::Session.new(Rails.application)
   session.get('/')
   body = session.response.body
-  body.gsub!(/<link[^>]*>/, '{% for style_url in style_urls %} <link type="text/css" href="{{style_url}}" media="all" rel="stylesheet"/> {% endfor %}')
-  body.gsub!(/<script[^>]*>[^<]*<\/script>/, ' {% for script_url in script_urls %} <script type="text/javascript" src="{{script_url}}"> </script> {% endfor %}')
+  body.sub!(/<link[^>]*>/, '{% for style_url in style_urls %} <link type="text/css" href="{{style_url}}" media="all" rel="stylesheet"/> {% endfor %}')
+  body.sub!(/<script[^>]*>[^<]*<\/script>/, ' {% for script_url in script_urls %} <script type="text/javascript" src="{{script_url}}"> </script> {% endfor %}')
   File.open(Rails.root.join('compiled', 'index.html.liquid'), 'w') do |f|
     f << body
   end

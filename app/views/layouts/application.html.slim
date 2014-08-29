@@ -14,7 +14,7 @@ html
                         span class="icon-bar"
                         span class="icon-bar"
                         span class="icon-bar"
-                    a.navbar-brand href='#/' Nunavut
+                    a.navbar-brand href='#/' Nunavut Promotional Products Marketplace
                 .collapse.navbar-collapse#navbar-collapse-1
                     ul.nav.navbar-nav.navbar-right
                         li.hidden
@@ -25,3 +25,8 @@ html
                         li route='kit'
                             a href='#/kit' Kit
         = yield
+        footer
+            | Hi
+    coffee:
+        window.catalog_id ||= '{{ catalog_id }}'
+        window.microsite_id ||= '{{ microsite_id }}'

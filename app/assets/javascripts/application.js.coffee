@@ -60,8 +60,8 @@ window.setActive = (path) ->
     $(el).removeClass('active')
     $(el).addClass('active') if path.match($(el).attr('route'))
   )
-window.catalog_id=1
-window.microsite_id=1
+window.catalog_id||=1
+window.microsite_id||=1
 
 window.pricePer = (product, quantity) ->
   return unless product && quantity && product.quantities && product.quantities[0]
