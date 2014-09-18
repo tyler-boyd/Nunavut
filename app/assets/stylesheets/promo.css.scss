@@ -1,0 +1,208 @@
+$yellowcolour: #ffcc00;
+$redcolour: #c00000;
+$bluecolour: #20497d;
+$turquoisecolour: #009898;
+$blackcolour: #000000;
+$whitecolour: #ffffff;
+$popupbackgroundcolour: #f5e6c4;
+
+.colouredbox {
+	line-height: 40px;
+	font-size: 14px;
+	font-color: #ffffff;
+	font-weight: 600;
+	width: 100%;
+	text-align: center;
+	}
+
+.tallcolouredbox {
+	line-height: 160px;
+	}
+
+.superbuttonbox {
+	float: left;
+	margin: 0 5px;
+	width: 48.5%;
+	border: 2px solid #ffffff;
+	}
+	
+.superbuttonimage {
+	float: left;
+	margin: 10px;
+	}
+	
+.superbuttontext {
+	font-size: 14px;
+	font-color: #ffffff;
+	font-weight: 400;
+	text-align: center;
+	margin: 35px;
+	}
+	
+.superbuttonboxleft{
+	}
+	
+.infobox {
+	padding: 10px;
+	font-weight: 400;
+	}
+	
+.infoboxleft {
+	text-align: left;
+	}
+	
+.infoboxcenter {
+	text-align: center;
+	}
+	
+.infobox>p {
+	font-size: 14px;
+	}
+
+.infobox a {
+	color: #dddddd;
+	}
+	
+.infobox a:hover {
+	color: #ddffff;
+	}
+	
+.margin25auto0 {
+	margin: 25px auto 0;
+	display: block;
+	}
+	
+.clear {
+	clear: both;
+	}
+	
+.blacktext {
+	color: $blackcolour;
+	}
+	
+.whitebackground {
+	background-color: $whitecolour;
+	}
+	
+.yellowbox {
+    background-color: $yellowcolour;
+	}
+
+.bluebox {
+    background-color: $bluecolour;
+	}
+
+.redbox {
+    background-color: $redcolour;
+	}
+
+.turquoisebox {
+    background-color: $turquoisecolour;
+	}
+
+.welcomebox {
+	height: 200px;
+	display: table;
+	overflow: hidden;
+	width: 100%;
+	}
+	
+.welcomeboxtext {
+	display: table-cell;
+	vertical-align: middle;
+	text-align: center;
+	font-size: 24px;
+	}
+
+.servingbox {
+	height: 140px;
+	display: table;
+	width: 100%;
+	}
+
+.extendfull {
+	
+	padding-left: 3000px;
+	margin-left: -3000px;
+	padding-right: 3000px;
+	margin-right: -3000px;
+	}
+	
+.servingboxtext {
+	display: table-cell;
+	vertical-align: middle;
+	text-align: center;
+	font-size: 24px;
+	}
+
+hr.hrwelcome {
+    margin: 5px auto 0;
+    width: 35%;
+	max-width: 35%;
+    border: 0;
+    height: 1px;
+	border: 2px solid #ffffff;
+	border-radius: 2px;
+    text-align: center;
+	color: #ffffff;
+	background-color: #ffffff;
+	}
+	
+.spacerline {
+	font-size: 12px;
+	}
+	
+.smallspacerline {
+	font-size: 6px;
+	}
+	
+.messageline {
+	font-size: 20px;
+	color: #000000;
+	text-align: center;
+	}
+	
+.brandimage {
+	float: left;
+	margin: 10px;
+	}
+
+.right {
+	text-align: right;
+	}
+	
+.standardbutton {
+	margin-left: 10px;
+    margin-bottom: 10px;
+	color: #000000;
+	background-color: #cccccc;
+	font-size: 12px;
+	font-family: arial,sans-serif;
+	padding: 4px 8px;
+	min-width: 64px;
+	font-weight: 400;
+	}
+
+.dropdownStyle ul {
+	background-color: $popupbackgroundcolour;
+	color: $blackcolour;
+    list-style-type: none;
+    border: 1px solid #000000;
+    margin: -10px 10px 10px;
+    padding: 0px;
+    overflow: hidden;
+    }    
+    
+.dropdownStyle a {
+    font-size: 1em;
+    color: #00C;
+    padding: 5px 5px;
+    text-decoration: none;
+    display: block;
+    cursor: pointer;
+    }
+
+.dropdownStyle a:hover {
+    background: #00C;
+    color: white;
+    }

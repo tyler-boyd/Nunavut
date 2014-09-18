@@ -10,6 +10,7 @@
 # Read Sprockets README (https:#github.com/sstephenson/sprockets#sprockets-directives) for details
 # about supported directives.
 #
+# SYSTEM files
 #= require underscore
 #= require jquery
 #= require jquery_ujs
@@ -19,29 +20,45 @@
 #= require ui-bootstrap
 #= require ui-bootstrap-showErrors
 #= require restangular
+#
+# USER files
 #= require controllers
 #= require_tree ./controllers
 #= require services
 #= require directives
 #= require filters
-
-myApp = angular.module('myApp', [
+#= require support
+#
+# first create the main Angular application with a whole bunch of dependencies.  A lot of these are really the 
+# same as the list above, which is used by sprockets to convert coffee files to javascript and to bundle it all up together - 
+#
+# The dependencies listed below are used by the Angular compiler to make sure it compiles in all the modules it needs to run the app
+# Note that ui-bootstrap is also a _module_ and not just a js file - it has a lot of widgets in it, some of which might even work,
+#
+Application = angular.module('micrositeTemplateApp', [
     'ngRoute',
-    'myApp.services',
-    'myApp.directives',
-    'myApp.controllers',
-    'myApp.filters',
     'restangular',
     'ui.bootstrap',
     'ui.bootstrap.showErrors'
-]).
-config(['$routeProvider', ($routeProvider) ->
+    'micrositeTemplateApp.services',
+    'micrositeTemplateApp.directives',
+    'micrositeTemplateApp.controllers',
+    'micrositeTemplateApp.filters',
+])
+
+# Add some configuration - initialization really.  
+# Set up which 
+Application.config(['$routeProvider', '$httpProvider', ($routeProvider, $httpProvider) ->
+  $httpProvider.defaults.useXDomain = true;
+  delete $httpProvider.defaults.headers.common['X-Requested-With'];
   $routeProvider.when '/home', {templateUrl: 'partial/home.html', controller: 'HomeCtrl' }
+  $routeProvider.when '/contact', {templateUrl: 'partial/contact.html', controller: 'ContactCtrl' }
   $routeProvider.when '/products', {templateUrl: 'partial/products.html', controller: 'ProductsIndexCtrl', reloadOnSearch: false }
   $routeProvider.when '/kit', {templateUrl: 'partial/kit.html', controller: 'KitCtrl'}
   $routeProvider.otherwise {redirectTo: '/home'}
-]).
-config(['RestangularProvider', '$httpProvider', (RestangularProvider, $httpProvider) ->
+])
+
+Application.config(['RestangularProvider', '$httpProvider', (RestangularProvider, $httpProvider) ->
   RestangularProvider.setBaseUrl('https://promocatalyst.net/api');
   RestangularProvider.addResponseInterceptor (data, operation, what, url, response, deferred) ->
     if data.options
@@ -50,7 +67,9 @@ config(['RestangularProvider', '$httpProvider', (RestangularProvider, $httpProvi
       else
         data.all_options = data.options
     data
-]).run(['$rootScope', '$location', ($rootScope, $location) ->
+])
+
+Application.run(['$rootScope', '$location', ($rootScope, $location) ->
   $rootScope.$on '$routeChangeStart', (event, next, current) ->
     window.setActive($location.path())
   window.catalog_id||=1
@@ -67,4 +86,7 @@ window.pricePer = (product, quantity) ->
   return unless product && quantity && product.quantities && product.quantities[0]
   revq = angular.copy(product.quantities).reverse()
   _.find(angular.copy(product.prices).reverse(), (price, index) -> quantity >= revq[index] )||product.prices[0]
-window.totalPrice = (item) -> item.quantity * window.pricePer(item.product, item.quantity)
+  
+window.totalPrice = (item) ->
+  alert ('ping')
+  item.quantity * window.pricePer(item.product, item.quantity)

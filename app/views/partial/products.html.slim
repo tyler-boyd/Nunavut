@@ -1,39 +1,40 @@
-header
-  .container
-    .row
+usercontent.whitebackground 
+  .container 
+    /! ng-controller="ProductsIndexCtrl"  **** THIS CONTROLLER HAS BEEN SET BY THE routeProvider 
+  
+    .row.turquoisebox.extendfull
       .col-xs-3
         h3 Search for Products
       .col-xs-7
         form ng-submit='search(data.query)'
           h3
-            input.form-control type='text' placeholder='Search...' ng-model='data.query'
+            input.form-control type='text' placeholder='Search by keyword ...' ng-model='data.query'
       .col-xs-2
         h3
-          button.btn.btn-success ng-click='search(data.query)' Search
+          button.standardbutton ng-click='search(data.query)' Search
+    .row.turquoisebox.extendfull
+      .col-xs-10
+		.right
+          button.standardbutton ng-click='openLinesModal()' Filter by Supplier Line
+          button.standardbutton ng-click='openCategoriesModal()' Filter by Category
+          button.standardbutton ng-click='openPricesModal()' Filter by Price
+      .col-xs-2
+        dropdown
+          button.standardbutton.dropdownbutton ng-click="sortdropdown.visible=!sortdropdown.visible" Set sort order<span class="caret"></span>
+          dropdownlist dropdownname="sortdropdown" ng-show='sortdropdown.visible'
+  		    ul 
+              li: a href="" ng-click="setDataSortFromDropdown('Name')" Name
+              li: a href="" ng-click="setDataSortFromDropdown('Price (High-Low)')" Price (High-Low)
+              li: a href="" ng-click="setDataSortFromDropdown('Price (Low-High)')" Price (Low-High)
     .row
-      .col-xs-8
-        button.btn.btn-default ng-click='openCategoriesModal()' Restrict Categories
-        | &nbsp;
-        button.btn.btn-default ng-click='openLinesModal()' Restrict Lines
-        | &nbsp;
-        button.btn.btn-default ng-click='openPricesModal()' Restrict Prices
-      .col-xs-4
-        .btn-group dropdown=''
-          button type="button" class="btn btn-danger dropdown-toggle"
-            | Sort: {{data.sort}}
-            span class="caret"
-          ul class="dropdown-menu" role="menu"
-            li: a href="javascript:void(0)" ng-click="data.sort='Name'" Name
-            li: a href="javascript:void(0)" ng-click="data.sort='Price (High)'" Price (High-Low)
-            li: a href="javascript:void(0)" ng-click="data.sort='Price (Low)'" Price (Low-High)
-            li.divider
-            li: a href="javascript:void(0)" ng-click="data.sort='None'" None
-    .row
-      .col-xs-12.text-center
-        pagination boundary-links="true" total-items="data.totalItems" items-per-page='24' ng-model="data.currentPage" ng-change='pageChange()' class="pagination-sm" previous-text="<" next-text=">" first-text="First" last-text="Last" max-size='10'
+      .col-xs-10.text-center
+        pagination boundary-links="true" total-items="data.totalItems" items-per-page='24' ng-model="data.currentPage" ng-change='pageChange()' previous-text="<" next-text=">" first-text="First Page" last-text="Last" max-size='10'
+	  .col-xs-2
+	    h5.blacktext
+		  | Sorted by: {{data.sort}}
 .results
   .container
-    .row.margin-top-50px.results
+    .row.results
       .col-lg-12
         div ng-repeat='product in products'
           span ng-switch='' on='$index % 6' ng-init='outerIndex = $index'
@@ -47,3 +48,5 @@ header
 .row
   .col-xs-12.text-center
     pagination boundary-links="true" total-items="data.totalItems" items-per-page='24' ng-model="data.currentPage" ng-change='pageChange()' class="pagination-sm" previous-text="<" next-text=">" first-text="First" last-text="Last" max-size='10'
+    
+    
