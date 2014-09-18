@@ -1,15 +1,46 @@
-app = angular.module('myApp.controllers', [])
+module = angular.module('micrositeTemplateApp.controllers', [])
 
-app.controller 'HomeCtrl',['$scope', ($scope)->
+module.controller 'HomeCtrl',['$scope', ($scope)->
 
 ]
 
-app.controller "ProductsIndexCtrl", [
+module.controller 'ContactCtrl',['$scope', ($scope)->
+
+]
+
+# in the controller "function declaration" we have to put ALL the "dependencies", however trivial.  So, if this controller calls ANYTHING 
+# from the 'banana' service, then 'banana' HAS to be listed as a dependency here, otherwise angular won't find it and responds 
+# with a message saying the service is undefined (even though it actually means the service is not declared to be linked to)
+# A dependency in this context means that "this module depends on something existing".  In other words it means "USES"  - this module uses 
+# modules a, b and c
+# This is sort of like the old concept of including all link headers at the top of a program so that the linker can resolve them.  The
+# list of names in the array that precede the actual parameter list are a kludge to try to get the system to be able minify this script,
+# even though it would just be easier to zip it. 
+# 
+module.controller "ProductsIndexCtrl", [
   "$scope", "$modal", "ApiFactory", "$routeParams", "$location", "$q"
   ($scope, $modal, ApiFactory, $routeParams, $location, $q) ->
     cats = undefined
     lines = undefined
     $scope._ = _
+    
+    $scope.data = {
+      # collection of general data about what is showing in the products panel
+      query: $routeParams.query || ""
+      currentPage: $routeParams.currentPage || 1
+      sort: $routeParams.sort || "none"
+      prices: {
+        min: $routeParams.min_price || undefined,
+        max: $routeParams.max_price || undefined
+      }
+    }
+
+    $scope.sortdropdown = {visible: false}
+    
+    $scope.setDataSortFromDropdown = (sortOrder) ->
+      $scope.data.sort = sortOrder
+      $scope.sortdropdown.visible = false
+      
     $scope.search = (query) ->
       $scope.selected_categories = _.select($scope.all_categories, (cat) ->
         cat.selected
@@ -17,10 +48,16 @@ app.controller "ProductsIndexCtrl", [
       $scope.selected_lines = _.select($scope.all_lines, (line) ->
         line.selected
       )
+      
       ApiFactory.searchProducts(query, $scope.selected_categories, $scope.selected_lines, $scope.data.currentPage, $scope.data.sort,
                                 $scope.data.prices.min, $scope.data.prices.max).then (result) ->
+
+        # this "then" function executes when the asynchronous call to searchProducts returns - it's a promise, but really just an easier way of chaining a callback
         $scope.data.totalItems = result.total_items
+
+        # here we actually return the data from the database to the scope...
         $scope.products = result.products
+        
         $location.search "query", query
         $location.search "sort", $scope.data.sort
         $location.search "categories", _.pluck($scope.selected_categories, "name")
@@ -30,8 +67,8 @@ app.controller "ProductsIndexCtrl", [
         $location.search "max_price", $scope.data.prices.max
 
     $scope.$watch 'data.sort', (newVal, oldVal)->
-      $scope.search($scope.data.query)
-
+      $scope.search($scope.data.query) if newVal != oldVal
+      
     $scope.pageChange = ->
       $scope.search $scope.data.query
 
@@ -42,16 +79,6 @@ app.controller "ProductsIndexCtrl", [
     lines = $routeParams.lines
     cats = [cats]  if typeof cats is "string"
     lines = [lines]  if typeof lines is "string"
-    $scope.data = {
-      query: $routeParams.query || ""
-      currentPage: $routeParams.currentPage || 1
-      sort: $routeParams.sort || "none"
-      prices: {
-        min: $routeParams.min_price || undefined,
-        max: $routeParams.max_price || undefined
-      }
-    }
-
 
     $scope.data.totalItems = $scope.data.currentPage * 24
     categories_promise = ApiFactory.getCategories()

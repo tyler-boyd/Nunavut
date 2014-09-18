@@ -1,6 +1,6 @@
-app = angular.module('myApp.controllers')
+module = angular.module('micrositeTemplateApp.controllers')
 
-app.controller 'KitCtrl',
+module.controller 'KitCtrl',
 [
   '$scope', 'ApiFactory', '$modal', 'KitStore', 'ArtworkStore', '$location',
   ($scope, ApiFactory, $modal, KitStore, ArtworkStore, $location) ->

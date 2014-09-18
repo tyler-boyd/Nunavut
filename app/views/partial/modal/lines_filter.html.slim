@@ -2,22 +2,23 @@
     .col-xs-6
       h3.modal-title Filter Lines
     .col-xs-6
-      input.form-control type='text' ng-model='query.name' placeholder='Start typing a line name...'
+      input.form-control type='text' ng-model='query.name' placeholder='Start typing a Supplier Line name...'
     .clearfix
 .modal-body
   div.row ng-repeat='group in filtered_lines(query.name)'
     div.col-xs-4 ng-repeat='line in group'
-      a.thumbnail href='javascript:void(0)' ng-click='line.selected = !(line.selected || false)' ng-show='line'
+      a.thumbnail href='javascript:void(0)' ng-show='line'
         img.img-responsive ng-src='{{line.image_url}}'
         .caption
-          .col-xs-2
-            input type='checkbox' ng-model='line.selected'
-          .col-xs-10
-            p
-              | {{line.name}}
+          .row
+            .col-xs-2
+              input type='checkbox' ng-model='line.selected' ng-click='line.selected = !(line.selected || false)' 
+            .col-xs-10
+              p
+                | {{line.name}}
+            .clearfix
           .clearfix
-        .clearfix
 
 .modal-footer
-    button.btn.btn-warning ng-click='cancel()' Cancel
     button.btn.btn-success ng-click='confirm()' Confirm
+    button.btn.btn-warning ng-click='cancel()' Cancel

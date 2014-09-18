@@ -3,9 +3,10 @@ html
     head
         title Nunavut
         = stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
+        = stylesheet_link_tag    "promo", media: "all", "data-turbolinks-track" => true
         = javascript_include_tag "application", "data-turbolinks-track" => true
-
-    body ng-app='myApp'
+        
+    body ng-app='micrositeTemplateApp'
         nav.navbar.navbar-default.navbar-fixed-top
             .container
                 .navbar-header
@@ -17,14 +18,12 @@ html
                     a.navbar-brand href='#/' Nunavut Promotional Products Marketplace
                 .collapse.navbar-collapse#navbar-collapse-1
                     ul.nav.navbar-nav.navbar-right
-                        li.hidden
                         li route='home'
                             a href='#/home' Home
                         li route='products'
-                            a href='#/products' Products
+                            a href='#/products' Selected Products
+						li route='contact'
+							a href='#/contact' Contact Us
                         li route='kit'
-                            a href='#/kit' Kit
+                            a href='#/kit' Get a Quote
         = yield
-        footer
-            | Hi
-    | catalog_tie

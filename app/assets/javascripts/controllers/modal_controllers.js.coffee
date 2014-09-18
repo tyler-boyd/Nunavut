@@ -1,6 +1,6 @@
-app = angular.module('myApp.controllers')
+module = angular.module('micrositeTemplateApp.controllers')
 
-app.controller 'ProductModalCtrl',['$scope', '$modalInstance', 'product', 'KitStore',
+module.controller 'ProductModalCtrl',['$scope', '$modalInstance', 'product', 'KitStore',
 ($scope, $modalInstance, product, KitStore)->
   $scope.product = product
   option_flattener = (carry, value, key) ->
@@ -15,6 +15,7 @@ app.controller 'ProductModalCtrl',['$scope', '$modalInstance', 'product', 'KitSt
     window.pricePer(product, quantity)
   $scope.totalPrice = (item) ->
     window.totalPrice(item)
+    window.showhello()
   $scope.close = ->
     $modalInstance.dismiss()
   $scope.addToKit = (item) ->
@@ -23,7 +24,7 @@ app.controller 'ProductModalCtrl',['$scope', '$modalInstance', 'product', 'KitSt
     $modalInstance.close(item)
 ]
 
-app.controller "CategoriesFilterModalCtrl", [
+module.controller "CategoriesFilterModalCtrl", [
   "$scope"
   "$modalInstance"
   "categories"
@@ -72,7 +73,7 @@ app.controller "CategoriesFilterModalCtrl", [
     $scope.cancel = ->
       $modalInstance.dismiss()
 ]
-app.controller "LinesFilterModalCtrl", [
+module.controller "LinesFilterModalCtrl", [
   "$scope"
   "$modalInstance"
   "lines"
@@ -88,8 +89,9 @@ app.controller "LinesFilterModalCtrl", [
       grouped = undefined
       matching_lines = undefined
       ord_selected = undefined
+      r = new RegExp(query, "i")
       matching_lines = _.select($scope.lines, (line) ->
-        line.name.match query
+        line.name.match r
       )
       alph_sort = _.sortBy(matching_lines, "name")
       ord_selected = _.sortBy(alph_sort, (line) ->
@@ -117,7 +119,7 @@ app.controller "LinesFilterModalCtrl", [
     $scope.cancel = ->
       $modalInstance.dismiss $scope.lines
 ]
-app.controller "PricesModalCtrl", [
+module.controller "PricesModalCtrl", [
   "$scope"
   "prices"
   "$modalInstance"

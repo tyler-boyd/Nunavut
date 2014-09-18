@@ -1,19 +1,19 @@
-app = angular.module('myApp.directives', [])
+module = angular.module('micrositeTemplateApp.directives', [])
 
-app.directive 'formGroup' , ()->
+module.directive 'formGroup' , ()->
     restrict: 'EA',
     transclude: true,
     scope: {},
     template: '<div class="form-group" show-errors ng-transclude></div>'
 
-app.directive 'errors' , ()->
+module.directive 'errors' , ()->
     restrict: 'A',
     scope: {
         errors: '='
     }
     template: '<div class="row" ng-show="errors"><div class="col-xs-12"><div class="alert alert-danger">' +
             '<ul><li ng-repeat="err in errors"> {{err}} </li></ul></div></div></div>'
-app.directive 'formatter',  ($filter, $parse) ->
+module.directive 'formatter',  ($filter, $parse) ->
     {
         require: 'ngModel',
         link: (scope, element, attrs, ngModel) ->
@@ -21,7 +21,7 @@ app.directive 'formatter',  ($filter, $parse) ->
                 '$' + parseFloat(value).toFixed(2)
     }
 
-app.directive 'inputGroup' , ()->
+module.directive 'inputGroup' , ()->
     {
         restrict: 'AE',
         scope: {
@@ -32,3 +32,4 @@ app.directive 'inputGroup' , ()->
         link: (scope, element, attrs)->
             scope.name = attrs.for.replace(/\./g, '_')
     }
+    

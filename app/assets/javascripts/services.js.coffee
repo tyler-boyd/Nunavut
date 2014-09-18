@@ -1,25 +1,42 @@
-app = angular.module('myApp.services', [])
+module = angular.module('micrositeTemplateApp.services', [])
 
-app.factory 'ApiFactory', ['Restangular', (Restangular) ->
+module.factory 'ApiFactory', ['Restangular', (Restangular) ->
   {
     searchProducts: (query, categories, suppliers, page, sort, min_price, max_price, min_net_price, max_net_price) ->
-      params = {
-        query: query,
-        page: page
-      };
-      params.sort = sort.toLowerCase()
-      if sort == "Price (High)"
-        params.sort = "price"
-      if sort == "Price (Low)"
-        params.sort = "-price"
+      params = {}
+      
+      params.query = query
+      params.page = page
+      
+      # Slight issue here that the sort parameter needed *exactly* to match some specific text.  Use a regex instead - slightly more flexible
+      pat = /^Price.*High.*Low.*/i
+      if pat.test(sort)
+        params.sort = 'price'
+      else 
+        pat = /^Price.*Low.*High.*/i
+        if pat.test(sort)
+          params.sort = '-price'
+        else 
+          pat = /^Name.*/i
+          if pat.test(sort)
+            params.sort = 'name'
+          else
+            params.sort ='none'
+          
       params.min_price = min_price if min_price
       params.max_price = max_price if max_price
       params.min_net_price = min_net_price if min_net_price
       params.max_net_price = max_net_price if max_net_price
       params.categories = JSON.stringify(_.map categories, (cat) -> cat.name) if categories
       params.lines = JSON.stringify(_.map suppliers, (sup) -> sup.name) if suppliers
+      
+      # catalog id is set as a global when the application starts up
       params.catalog_id = window.catalog_id
+      # Restangular one is used here rather than restangular all as only a single structure is returned, and not an array of structures (or rows as they are really)
+      # the single structure returned is a object with several variables - the total number of records returned and the actual data, which is an array ...... what 
+      # could have been returned by a getlist call, and some "errors"
       Restangular.one('products').get(params)
+      
     getProduct: (product_id) ->
       Restangular.one('products', product_id).get()
     getCategories: () ->
@@ -27,7 +44,9 @@ app.factory 'ApiFactory', ['Restangular', (Restangular) ->
     getSuppliers: () ->
       Restangular.all('suppliers').getList()
     getLines: () ->
-      Restangular.all('lines').getList()
+      params = {}
+      params.catalog_id = window.catalog_id
+      Restangular.all('lines').getList(params)
     getOrganization: (id) ->
       Restangular.one('organizations', id).get()
     submitKit: (orig_kit) ->
@@ -43,7 +62,7 @@ app.factory 'ApiFactory', ['Restangular', (Restangular) ->
   }
 ]
 
-app.factory 'KitStore', ['$window', ($window) ->
+module.factory 'KitStore', ['$window', ($window) ->
   {
     _val: JSON.parse($window.localStorage.getItem('kit')) || {items: []}
     save: () -> $window.localStorage.setItem('kit', JSON.stringify(this._val))
@@ -65,7 +84,7 @@ app.factory 'KitStore', ['$window', ($window) ->
   }
 ]
 
-app.factory 'ArtworkStore', ['$window', '$q', ($window, $q) ->
+module.factory 'ArtworkStore', ['$window', '$q', ($window, $q) ->
   {
     initialized: false
     error: undefined

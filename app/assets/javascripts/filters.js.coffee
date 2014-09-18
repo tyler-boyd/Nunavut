@@ -1,6 +1,6 @@
-app = angular.module('myApp.filters', [])
+module = angular.module('micrositeTemplateApp.filters', [])
 
-app.filter 'humanize', ()->
+module.filter 'humanize', ()->
   (input) ->
     if _.isString(input)
       return input.replace(/_/g, ' ').replace /(\w+)/g, (match) ->

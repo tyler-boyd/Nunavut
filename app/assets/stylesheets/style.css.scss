@@ -1,10 +1,13 @@
 $white: #ffffff;
 $black: #000;
 $light-gray: #eeeeee;
+$dark-gray: #808080;
 $light-blue: rgb(55, 182, 206);
 $dark-blue: #2c3e50;
 $gold: #A17E0C;
 $dark-gold: #574407;
+
+$heightofnavbar:50px;
 
 /*!
  * Start Bootstrap - Freelancer Bootstrap Theme (http://startbootstrap.com)
@@ -16,13 +19,9 @@ body {
     overflow-x: hidden;
 }
 
-header {
+usercontent {
     color: #fff;
-    background: $light-blue;
-}
-p {
-    font-size: 20px;
-}
+  }
 
 .items {
     margin-top: 20px;
@@ -47,19 +46,25 @@ img.product-image {
 }
 
 a.product-thumbnail {
-    img {
-        border-radius: 20px;
-    }
+    padding: 8px;
+    min-height: 300px;
+    max-height: 300px;
     background-color: $white;
-    border-color: $white;
+    border-color: $dark-gray;
+    overflow: hidden;
+    border-radius: 16px;
+    margin: 1px;
+    img {
+        border-radius: 16px;
+    }
     &:hover {
-        background-color: #f3f3f3;
+        background-color: #d0d0d0;
         border-color: $dark-blue;
     }
     .caption {
         color: $black;
         font-weight: 500;
-        font-size: 1.2em;
+        font-size: 1em;
         &:hover {
             color: $light-blue;
             -webkit-transition: all .3s;
@@ -67,15 +72,10 @@ a.product-thumbnail {
             transition: all .3s;
         }
     }
-    padding: 10px;
-    min-height: 400px;
-    max-height: 400px;
     @media(min-width: 1200px) {
-        min-height: 360px;
-        max-height: 360px;
+        min-height: 300px;
+        max-height: 300px;
     }
-    overflow: hidden;
-    border-radius: 20px;
 }
 
 .home-thumbnail {
@@ -100,30 +100,8 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-family: Helvetica, Arial, sans-serif;
     font-weight: 700;
-}
-
-hr.star-light,
-hr.star-primary {
-    margin: 25px auto 10px;
-    padding: 0;
-    max-width: 250px;
-    border: 0;
-    border-top: solid 5px;
-    text-align: center;
-}
-
-hr.star-light:after,
-hr.star-primary:after {
-    content: "\f005";
-    background-color: $light-blue;
-    display: inline-block;
-    position: relative;
-    top: -.8em;
-    padding: 0 .25em;
-    font-family: FontAwesome;
-    font-size: 2em;
 }
 
 .results {
@@ -134,75 +112,46 @@ hr.star-primary:after {
     }
 }
 
-.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus {
+.pagination > .active > a, 
+.pagination > .active > span, 
+.pagination > .active > a:hover, 
+.pagination > .active > span:hover, 
+.pagination > .active > a:focus, 
+.pagination > .active > span:focus {
     background-color: $dark-blue;
     border-color: $dark-blue;
 }
 
-hr.star-light {
-    border-color: #fff;
-}
-
-hr.star-light:after {
-    color: #fff;
-    background-color: $light-blue;
-}
-
-hr.star-primary {
-    border-color: $white;
-}
-
-hr.star-primary:after {
-    color: $white;
-    background-color: $light-blue;
-}
+.pagination { color: red !important }
 
 .img-centered {
-    margin: 0 auto;
-}
+  margin: 0 auto;
+  }
 
-
-header .container {
-    padding-top: 100px;
-    padding-bottom: 50px;
-}
-
-header img {
-    display: block;
-    margin: 0 auto 20px;
-}
-
-header .intro-text .name {
-    display: block;
-    text-transform: uppercase;
-    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
-    font-size: 2em;
-    font-weight: 700;
-}
-
-header .intro-text .skills {
-    font-size: 1.25em;
-    font-weight: 300;
+usercontent .container {
+    padding-top: $heightofnavbar;
+    padding-bottom: 0px;
 }
 
 @media(min-width:768px) {
-    header .container {
-        padding-top: 75px;
+    usercontent .container {
+        padding-top: $heightofnavbar;
         padding-bottom: 0px;
     }
 
-    header .intro-text .name {
+    usercontent .intro-text .name {
         font-size: 4.75em;
     }
 
-    header .intro-text .skills {
+    usercontent .intro-text .skills {
         font-size: 1.75em;
     }
 }
 
 @media(min-width:768px) {
     .navbar-fixed-top {
-        padding: 10px 0;
+	    line-height: $heightofnavbar;
+        // padding: 10px 0;
         -webkit-transition: padding .3s;
         -moz-transition: padding .3s;
         transition: padding .3s;
@@ -225,7 +174,7 @@ header .intro-text .skills {
 }
 
 .navbar {
-    text-transform: uppercase;
+//     text-transform: uppercase;
     font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
     font-weight: 700;
 }
