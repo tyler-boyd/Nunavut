@@ -2,9 +2,9 @@ task compile_microsite: :environment do
   if !Rails.env.production?
     raise 'Re-run with "RAILS_ENV=production"'
   end
-  Dir.mkdir(Rails.root.join('compiled')) unless Dir.exist? Rails.root.join('compiled')
-  `rm -rf compiled/*`
-  `rm compiled.zip`
+  `rm -rf compiled/` if Dir.exist? Rails.root.join('compiled')
+  `rm compiled.zip` if File.exist? 'compiled.zip'
+  `mkdir -p compiled/partial`
 
   # Partials
   files = Dir.glob(Rails.root + 'app/views/partial/**/**').select { |match| File.file? match }
