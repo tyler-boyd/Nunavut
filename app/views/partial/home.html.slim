@@ -27,7 +27,7 @@ usercontent
 				span
 				  hr.hrwelcome
           .col-xs-3
-			img.img-center src='/assets/flag.png'		
+			= image_tag 'flag.png'		
     .row	
 	  .smallspacerline
         ' &nbsp;	
@@ -41,12 +41,12 @@ usercontent
 	.row
 	  .col-xs-8.col-xs-offset-2
 	    .redbox.superbuttonbox
-          img.superbuttonimage src='/assets/tradeshowlogo.png'		
+          = image_tag 'tradeshowlogo.png', class: 'superbuttonimage'
 		  .superbuttontext
 		    |
 		      2014<br />Nunavut<br />Trade Show<br />Catalogue
 		.bluebox.superbuttonbox
-		  img.superbuttonimage src='/assets/inukshuk.png'		
+		  = image_tag 'inukshuk.png', class: 'superbuttonimage'
 		  .superbuttontext
 		    |
 		      Nunavut<br />Promotional<br />Products<br />Marketplace
@@ -66,11 +66,11 @@ usercontent
           .col-xs-6
             .row
 		      .col-xs-6
-			    img.margin25auto0 src='/assets/mike.png'
+		      	= image_tag 'mike.png', class: 'margin25auto0'
 				.infobox.infoboxcenter
 				  ' Michael Blanchard
 			  .col-xs-6
-				img.margin25auto0 src='/assets/sheri.png'
+				= image_tag 'sheri.png', class: 'margin25auto0'
 				.infobox.infoboxcenter
 				  ' Sheri Boyd
 	.row
